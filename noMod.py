@@ -123,10 +123,9 @@ while gameloop == True:
     elif double_dealers_turn == 3:
         double_dealers_turn = 0
     
-    try:
-        if "help" in player_input:
-            Help()
-    finally:
+
+    if "help" in player_input:
+        Help()
         dealers_turn = False
     
     if "use " in player_input:
@@ -141,12 +140,14 @@ while gameloop == True:
                 two_items.remove("Magnifying glass")
             else:
                 typewrite("YOU don't have the item.")
+            dealers_turn = False
                 
         elif player_input == "use "+"handcuffs":
             typewrite("YOU used the Handcuffs.")
             typewrite("DEALER skips 2 turns.")
             double_dealers_turn += 1
             two_items.remove("Handcuffs")
+            dealers_turn = False
         
         elif player_input == "use "+"medicine":
             health += 1
@@ -158,6 +159,7 @@ while gameloop == True:
             player_dmg = 2
             double_dmg = True
             two_items.remove("Saw")
+            dealers_turn = False
 
         elif player_input == "use "+"Cola":
             typewrite("You used the Cola. Ejects the bullet loaded.")
@@ -167,7 +169,7 @@ while gameloop == True:
             elif shots[0] == 0:
                 typewrite("The bullet was a blank.")
             two_items.remove("Cola")
-        dealers_turn = False
+            dealers_turn = False
     
     elif player_input == "shoot "+"you":
         if shots[0] == 1:
