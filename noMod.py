@@ -77,7 +77,7 @@ def typewrite(text):
     print()
 
 def randomItems():
-    items = ["Handcuffs", "Magnifying glass", "Cola", "Medicine"]
+    items = ["Handcuffs", "Magnifying glass", "Cola", "Medicine", "Saw"]
     ran_items = random.choice(items)
     return ran_items
 
@@ -142,11 +142,31 @@ while gameloop == True:
             else:
                 typewrite("YOU don't have the item.")
                 
-        if player_input == "use "+"handcuffs":
-            typewrite("You used the Handcuffs.")
+        elif player_input == "use "+"handcuffs":
+            typewrite("YOU used the Handcuffs.")
+            typewrite("DEALER skips 2 turns.")
             double_dealers_turn += 1
             two_items.remove("Handcuffs")
         
+        elif player_input == "use "+"medicine":
+            health += 1
+            typewrite("You used Medicine. Life +1")
+            two_items.remove("Medicine")
+        
+        elif player_input == "use "+"saw":
+            typewrite("You used Saw. double damage for first hit. +1")
+            player_dmg = 2
+            double_dmg = True
+            two_items.remove("Saw")
+
+        elif player_input == "use "+"Cola":
+            typewrite("You used the Cola. Ejects the bullet loaded.")
+            typewrite("Bullet ejected.")
+            if shots[0] == 1:
+                typewrite("The bullet was a live.")
+            elif shots[0] == 0:
+                typewrite("The bullet was a blank.")
+            two_items.remove("Cola")
         dealers_turn = False
     
     elif player_input == "shoot "+"you":
